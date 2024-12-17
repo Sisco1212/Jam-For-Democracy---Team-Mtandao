@@ -15,8 +15,20 @@ public class GraphManager : MonoBehaviour
 
     private void Start()
     {
-        //set the first random node as the starting node
-        CurrentNode = allNodes[Random.Range(0, allNodes.Count)];
+        //Find the node with a specific ID
+        int targetID = 0;
+        CurrentNode = allNodes.Find(node => node.ID == targetID);
+        if(CurrentNode != null)
+        {
+            Debug.Log($"Starting node set to {CurrentNode.ID} (found by ID)");
+        }
+        else
+        {
+            Debug.LogWarning($"Node with ID {targetID} not found! Defaulting to a random node.");
+            CurrentNode = allNodes[Random.Range(0, allNodes.Count)];
+        }
+        //Debug.Log($"Starting node set to {CurrentNode.ID}");
+
         TriggerTask(CurrentNode); //Trigger a task for the first node ///Add code to bring up the timed questions
 
         SetConnnections();
@@ -28,6 +40,8 @@ public class GraphManager : MonoBehaviour
         {
             CurrentNode = targetNode;
             TriggerTask(CurrentNode);
+
+            Debug.Log($"Moved to node {CurrentNode.ID}");
         } 
         else
         {
@@ -60,7 +74,10 @@ public class GraphManager : MonoBehaviour
             Debug.Log("You Win");
         }
 
+<<<<<<< Updated upstream
         //lose condition
+=======
+>>>>>>> Stashed changes
         if (redCount == allNodes.Count)
         {
             Debug.Log("Game Over");
@@ -70,6 +87,7 @@ public class GraphManager : MonoBehaviour
     //method to manually link connected nodes using a relationship
     public void SetConnnections()
     {
+<<<<<<< Updated upstream
         for (int i = 0; i < allNodes.Count - 1; i++)
         {
             // Connect each node to the next
@@ -80,6 +98,17 @@ public class GraphManager : MonoBehaviour
             GameObject lineObject = DrawConnection(allNodes[i], allNodes[i + 1]);
             connections.Add(lineObject);
         }
+=======
+        // Example of manually connecting the first two nodes in the list
+        Node2D node1 = allNodes[0];
+        Node2D node2 = allNodes[1];
+
+        // Add each node to the other's ConnectedNodes list to establish a bi-directional connection
+        node1.ConnectedNodes.Add(node2);
+        node2.ConnectedNodes.Add(node1);
+
+        Debug.Log($"Node {node1.ID} is connected to Node {node2.ID}");
+>>>>>>> Stashed changes
     }
 
     // Method to draw a connection between two nodes

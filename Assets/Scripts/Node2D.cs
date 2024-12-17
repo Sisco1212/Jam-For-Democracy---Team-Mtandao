@@ -22,25 +22,31 @@ public class Node2D : MonoBehaviour
         if (spriteRenderer == null)
         {
             spriteRenderer = GetComponent<SpriteRenderer>();
+            Debug.Log("SpriteRenderer automatically assigned in Awake.");
         }
     }
     private void Start()
     {
         SetNeutral();
+        Debug.Log("Node2D started. Neutral sprite set.");
     }
 
     public void SetRed()
     {
         spriteRenderer.sprite = redSprite;
+        Debug.Log("Node2D set to Red (failure state).");
     }
     public void SetGreen()
     {
         spriteRenderer.sprite = greenSprite;
+        Debug.Log("Node2D set to Green (success state).");
+
     }
 
     private void SetNeutral()
     {
         spriteRenderer.sprite = neutralSprite;
+        Debug.Log("Node2D set to Neutral (default state).");
     }
 
 

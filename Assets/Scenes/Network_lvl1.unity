@@ -233,7 +233,7 @@ MonoBehaviour:
   - {fileID: 1205524232}
   neutralSprite: {fileID: 21300000, guid: cbc1ad435ce72ed4ea2da2f060721112, type: 3}
   redSprite: {fileID: 21300000, guid: 043fd74f9a2bc7243a26180ffe8f5a4f, type: 3}
-  greenSprite: {fileID: 0}
+  greenSprite: {fileID: 21300000, guid: 2650bb5a55355874488b81dfc1899ef8, type: 3}
   spriteRenderer: {fileID: 115195667}
 --- !u!212 &115195667 stripped
 SpriteRenderer:
@@ -351,7 +351,7 @@ MonoBehaviour:
   - {fileID: 1205524232}
   neutralSprite: {fileID: 21300000, guid: cbc1ad435ce72ed4ea2da2f060721112, type: 3}
   redSprite: {fileID: 21300000, guid: 043fd74f9a2bc7243a26180ffe8f5a4f, type: 3}
-  greenSprite: {fileID: 0}
+  greenSprite: {fileID: 21300000, guid: 2650bb5a55355874488b81dfc1899ef8, type: 3}
   spriteRenderer: {fileID: 170126314}
 --- !u!212 &170126314 stripped
 SpriteRenderer:
@@ -470,7 +470,7 @@ MonoBehaviour:
   - {fileID: 952037190}
   neutralSprite: {fileID: 21300000, guid: cbc1ad435ce72ed4ea2da2f060721112, type: 3}
   redSprite: {fileID: 21300000, guid: 043fd74f9a2bc7243a26180ffe8f5a4f, type: 3}
-  greenSprite: {fileID: 0}
+  greenSprite: {fileID: 21300000, guid: 2650bb5a55355874488b81dfc1899ef8, type: 3}
   spriteRenderer: {fileID: 457353251}
 --- !u!212 &457353251 stripped
 SpriteRenderer:
@@ -728,7 +728,7 @@ MonoBehaviour:
   - {fileID: 457353250}
   neutralSprite: {fileID: 21300000, guid: cbc1ad435ce72ed4ea2da2f060721112, type: 3}
   redSprite: {fileID: 21300000, guid: 043fd74f9a2bc7243a26180ffe8f5a4f, type: 3}
-  greenSprite: {fileID: 0}
+  greenSprite: {fileID: 21300000, guid: 2650bb5a55355874488b81dfc1899ef8, type: 3}
   spriteRenderer: {fileID: 952037191}
 --- !u!212 &952037191 stripped
 SpriteRenderer:
@@ -979,7 +979,7 @@ MonoBehaviour:
   - {fileID: 1230412899}
   neutralSprite: {fileID: 21300000, guid: cbc1ad435ce72ed4ea2da2f060721112, type: 3}
   redSprite: {fileID: 21300000, guid: 043fd74f9a2bc7243a26180ffe8f5a4f, type: 3}
-  greenSprite: {fileID: 0}
+  greenSprite: {fileID: 21300000, guid: 2650bb5a55355874488b81dfc1899ef8, type: 3}
   spriteRenderer: {fileID: 1095564218}
 --- !u!212 &1095564218 stripped
 SpriteRenderer:
@@ -1099,7 +1099,7 @@ MonoBehaviour:
   - {fileID: 457353250}
   neutralSprite: {fileID: 21300000, guid: cbc1ad435ce72ed4ea2da2f060721112, type: 3}
   redSprite: {fileID: 21300000, guid: 043fd74f9a2bc7243a26180ffe8f5a4f, type: 3}
-  greenSprite: {fileID: 0}
+  greenSprite: {fileID: 21300000, guid: 2650bb5a55355874488b81dfc1899ef8, type: 3}
   spriteRenderer: {fileID: 1205524233}
 --- !u!212 &1205524233 stripped
 SpriteRenderer:
@@ -1219,7 +1219,7 @@ MonoBehaviour:
   - {fileID: 2011939682}
   neutralSprite: {fileID: 21300000, guid: cbc1ad435ce72ed4ea2da2f060721112, type: 3}
   redSprite: {fileID: 21300000, guid: 043fd74f9a2bc7243a26180ffe8f5a4f, type: 3}
-  greenSprite: {fileID: 0}
+  greenSprite: {fileID: 21300000, guid: 2650bb5a55355874488b81dfc1899ef8, type: 3}
   spriteRenderer: {fileID: 1230412900}
 --- !u!212 &1230412900 stripped
 SpriteRenderer:
@@ -1342,7 +1342,7 @@ MonoBehaviour:
   - {fileID: 2011939682}
   neutralSprite: {fileID: 21300000, guid: cbc1ad435ce72ed4ea2da2f060721112, type: 3}
   redSprite: {fileID: 21300000, guid: 043fd74f9a2bc7243a26180ffe8f5a4f, type: 3}
-  greenSprite: {fileID: 0}
+  greenSprite: {fileID: 21300000, guid: 2650bb5a55355874488b81dfc1899ef8, type: 3}
   spriteRenderer: {fileID: 1344667676}
 --- !u!1001 &1634534659
 PrefabInstance:
@@ -1455,7 +1455,7 @@ MonoBehaviour:
   - {fileID: 1230412899}
   neutralSprite: {fileID: 21300000, guid: cbc1ad435ce72ed4ea2da2f060721112, type: 3}
   redSprite: {fileID: 21300000, guid: 043fd74f9a2bc7243a26180ffe8f5a4f, type: 3}
-  greenSprite: {fileID: 0}
+  greenSprite: {fileID: 21300000, guid: 2650bb5a55355874488b81dfc1899ef8, type: 3}
   spriteRenderer: {fileID: 1634534663}
 --- !u!212 &1634534663 stripped
 SpriteRenderer:
@@ -1579,7 +1579,7 @@ MonoBehaviour:
   - {fileID: 1230412899}
   neutralSprite: {fileID: 21300000, guid: cbc1ad435ce72ed4ea2da2f060721112, type: 3}
   redSprite: {fileID: 21300000, guid: 043fd74f9a2bc7243a26180ffe8f5a4f, type: 3}
-  greenSprite: {fileID: 0}
+  greenSprite: {fileID: 21300000, guid: 2650bb5a55355874488b81dfc1899ef8, type: 3}
   spriteRenderer: {fileID: 2011939681}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:

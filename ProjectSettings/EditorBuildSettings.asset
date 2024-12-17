@@ -14,4 +14,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/HomeLevel.unity
     guid: 35f67334ff696974485051b7729ebd7a
+  - enabled: 1
+    path: Assets/Scenes/Network_lvl1.unity
+    guid: 7cd0779c2e648b849af5081e7bf62e3f
   m_configObjects: {}

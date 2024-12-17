@@ -9,19 +9,61 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetMouseButtonDown(0))
+#if UNITY_ANDROID || UNITY_IOS
+        if (Input.touchCount > 0)
         {
-            Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            RaycastHit2D hit = Physics2D.Raycast(mousePos, Vector2.zero);
+            Touch touch = Input.GetTouch(0); //get the first touch
+            // Convert touch position to world space
+            Vector2 touchPos = Camera.main.ScreenToWorldPoint(touch.position);
+            Debug.Log("Touch position: " + touchPos);
 
-            if(hit.collider != null)
+            RaycastHit2D hit = Physics2D.Raycast(touchPos, Vector2.zero);
+
+            if (hit.collider != null)
             {
-                Node2D clickedNode = hit.collider.GetComponent<Node2D>();
-                if(clickedNode != null)
+                Debug.Log("Hit a collider: " + hit.collider.name);
+
+                Node2D touchedNode = hit.collider.GetComponent<Node2D>();
+                if (touchedNode != null)
                 {
-                    graphManager.MoveToNode(clickedNode);
+                    Debug.Log("Touched Node2D: " + touchedNode.name);
+                    graphManager.MoveToNode(touchedNode);
+                }
+                else
+                {
+                    Debug.Log("Hit object is not a Node2D."); // Debug log if the hit object is not a Node2D
                 }
             }
         }
+#else
+        // If the platform does not support touch (e.g., desktop)
+        // Check if the left mouse button is clicked (0 is the left mouse button)
+        if (Input.GetMouseButtonDown(0))
+        {
+            Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            Debug.Log("Mouse position: " + mousePos);
+            RaycastHit2D hit = Physics2D.Raycast(mousePos, Vector2.zero);
+
+            if(hit.collider != null)
+            { 
+                Debug.Log("Hit a collider: " + hit.collider.name);
+
+                Node2D clickedNode = hit.collider.GetComponent<Node2D>();
+                if(clickedNode != null)
+                {
+                    Debug.Log("Clicked Node2D: " + clickedNode.name);
+                    graphManager.MoveToNode(clickedNode);
+                }
+                else
+                {
+                   Debug.Log("Hit object is not a Node2D."); // Debug log if the hit object is not a Node2D
+                }
+            }
+            else
+                {
+                    Debug.Log("No collider hit."); // Debug log if the raycast hit nothing
+                }
+        }
+#endif
     }
 }

@@ -7,10 +7,14 @@ public class Node2D : MonoBehaviour
 {
     public int ID;
     public List<Node2D> ConnectedNodes; //list of nodes connected to this one
+
+    //sprite changes on win/lose
+    [Header("Sprites for states")]
+    public Sprite neutralSprite;  // Default sprite
+    public Sprite redSprite;      // Sprite for failure state
+    public Sprite greenSprite;    // Sprite for success state
+
     public SpriteRenderer spriteRenderer;
-    public Color RedColor;
-    public Color GreenColor;
-    public Color NeutralColor;
 
     private void Awake()
     {
@@ -24,17 +28,20 @@ public class Node2D : MonoBehaviour
     {
         SetNeutral();
     }
+
     public void SetRed()
     {
-        spriteRenderer.color = RedColor;
+        spriteRenderer.sprite = redSprite;
     }
     public void SetGreen()
     {
-        spriteRenderer.color = GreenColor;
+        spriteRenderer.sprite = greenSprite;
     }
 
     private void SetNeutral()
     {
-        spriteRenderer.color = NeutralColor;
+        spriteRenderer.sprite = neutralSprite;
     }
+
+
 }

@@ -25,4 +25,11 @@ public class GameManager : MonoBehaviour
     public void ShowQuestion1(GameObject panelToShow) {
         panelToShow.SetActive(true);
     }
+ 
+    public void Show(GameObject panelToShow) {
+        panelToShow.SetActive(true);
+    }
+    public void Hide(GameObject panelToHide) {
+        panelToHide.SetActive(false);
+    }
 }

@@ -10,12 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6c183ad77e68d3d41b27f3e58efac4e2, type: 3}
-  m_Name: Q2 - Sister
+  m_Name: Q1
   m_EditorClassIdentifier: 
-  questionText: She is taking a test
-  optionAImage: {fileID: 21300000, guid: 6fdc9cf962703be4187617c3d1cdb8d5, type: 3}
-  optionBImage: {fileID: 21300000, guid: 44d38319238108e4da665e59c77cf5bb, type: 3}
-  optionCImage: {fileID: 21300000, guid: 4363e8f9706a0394891bfaf6645e17b6, type: 3}
-  isOptionACorrect: 0
-  isOptionBCorrect: 1
-  isOptionCCorrect: 0
+  questionText: What is the capital of France?
+  optionA: Paris
+  optionB: Rome
+  isOptionACorrect: 1
+  explanationForCorrect: Paris was made the capital city in 1402
+  explanationForIncorrect: Rome is the capital city of italy

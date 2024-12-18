@@ -2,7 +2,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.EventSystems;
 
 public class Node2D : MonoBehaviour
 {
@@ -10,10 +9,6 @@ public class Node2D : MonoBehaviour
     public List<Node2D> ConnectedNodes; //list of nodes connected to this one
 
     public QuestionData assignedQuestion; // The question assigned to this node
-
-    // Delegate for the OnClick event
-    public delegate void NodeClickHandler();
-    public event NodeClickHandler OnClick;
 
     //sprite changes on win/lose
     [Header("Sprites for states")]
@@ -25,7 +20,6 @@ public class Node2D : MonoBehaviour
 
     public bool isGreen = false;  // Track if the node is green
     public bool isRed = false;    // Track if the node is red
-    public bool isAnswered = false;
 
     private void Awake()
     {
@@ -66,7 +60,6 @@ public class Node2D : MonoBehaviour
     {
         isRed = true;
         isGreen = false;  // Reset green state
-        isAnswered = true; // Mark the node as answered
         spriteRenderer.sprite = redSprite;
         Debug.Log("Node2D set to Red (failure state).");
 
@@ -76,7 +69,6 @@ public class Node2D : MonoBehaviour
     {
         isGreen = true;
         isRed = false;  // Reset red state
-        isAnswered = true; // Mark the node as answered
         spriteRenderer.sprite = greenSprite;
         Debug.Log("Node2D set to Green (success state).");
 
@@ -90,27 +82,5 @@ public class Node2D : MonoBehaviour
         Debug.Log("Node2D set to Neutral (default state).");
     }
 
-    // Method to reset the node to neutral state
-    public void ResetState()
-    {
-        isGreen = false;
-        isRed = false;
-        isAnswered = false; // Mark the node as answered
-        SetNeutral(); // Revert to the neutral state
-        Debug.Log("Node2D state reset to Neutral.");
-    }
-
-    private void OnMouseDown()
-    {
-        // Prevent further clicks if the node has already been answered
-        if (isAnswered)
-        {
-            Debug.Log("Node has already been answered. Cannot change.");
-            return; // Early exit to prevent further clicks
-        }
-
-        // Trigger the OnClick event when the node is clicked
-        OnClick?.Invoke();
-    }
 
 }

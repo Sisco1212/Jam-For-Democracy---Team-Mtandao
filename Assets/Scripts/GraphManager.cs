@@ -20,16 +20,75 @@ public class GraphManager : MonoBehaviour
     public TMP_Text messageText; // Text for the message
     public Button optionAButton; // Button for Option A
     public Button optionBButton; // Button for Option B
-    public TMP_Text explanationText; // Optional: Text for explanation
+    public Button optionCButton; // Button for Option C
+
+    public GameObject winUI; // Reference to the "You Win!" UI Panel
+    public GameObject loseUI; // Reference to the "Game Over" UI Panel
+
+    private int targetGreenNodesCount;
+
+    public LevelData levelData;
 
     private Coroutine timerCoroutine; // Reference to the timer coroutine
+    private bool isTimerStarted = false; // Track if the timer has been started
+
+    public GameObject spamWarningText;  // Assign this in the inspector
+
+    public TMP_Text timerText;
+    private float timeRemaining;
 
 
     private int greenCount = 0;
     private int redCount = 0;
 
+    // This will be called by the LevelManager to initialize the level
+    public void InitializeLevel(LevelData levelData)
+    {
+        this.levelData = levelData; // Assign level data here
+        SetTimerDuration(levelData.timerDuration); // Set the timer duration for the current level
+        allNodes = levelData.nodes; // Set the nodes for this level
+        CurrentNode = levelData.startNode; // Set the starting node
+        targetGreenNodesCount = levelData.targetGreenNodesCount; // Initialize target green nodes count
+
+        // Reset green and red counts
+        greenCount = 0;
+        redCount = 0;
+        Debug.Log("Counts have been reset");
+
+        SetConnections(); // Set the connections based on current level's nodes
+        HighlightNode(CurrentNode); // Highlight the starting node
+
+        // Reset any other state variables if needed
+        ResetNodeStates(); // Reset the node colors (green/red)
+
+        // Activate the message UI off at the start
+        messageUI.SetActive(false);
+    }
+
+
+    // Reset the node states (green/red) at the start of each level
+    private void ResetNodeStates()
+    {
+        foreach (var node in allNodes)
+        {
+            node.ResetState(); // Assuming ResetState() is a method that clears the node's color state (green/red)
+        }
+    }
+
+    public void ResetNodesForNewLevel()
+    {
+        foreach (Node2D node in allNodes)
+        {
+            node.ResetState();  // Reset all nodes to their neutral state
+        }
+    }
+
+
     private void Start()
     {
+        InitializeLevel(levelData);
+        SetTimerDuration(levelData.timerDuration); // Set the timer duration for the current level
+
         // Find the node with a specific ID or randomly select one
         int targetID = 0;
         CurrentNode = allNodes.Find(node => node.ID == targetID);
@@ -43,13 +102,33 @@ public class GraphManager : MonoBehaviour
             CurrentNode = allNodes[Random.Range(0, allNodes.Count)];
         }
 
-        TriggerTask(CurrentNode); // Trigger task on starting node
+        //TriggerTask(CurrentNode); // Trigger task on starting node
         HighlightNode(CurrentNode); // Highlight the active node with the particle effect on start
         SetConnections(); // Set the connections for the nodes (visualize them)
 
         //toogle messages UI visibility off on start
-        messageUI.SetActive(false); 
+        messageUI.SetActive(false);
 
+        //add listener to the starting node to trigger ShowMessages when clicked
+        //CurrentNode.OnClick += () => ShowMessageUI(CurrentNode);
+        CurrentNode.OnClick += () => OnFirstNodeClick(CurrentNode);
+
+    }
+
+
+
+    private void OnFirstNodeClick(Node2D node)
+    {
+        // Check if the timer has already been started
+        if (!isTimerStarted)
+        {
+            // Start the timer only once
+            isTimerStarted = true;
+            timerCoroutine = StartCoroutine(AnswerTimer(node, 10f)); // Start the timer for 10 seconds
+        }
+
+        // Now show the message UI and proceed with the usual flow
+        ShowMessageUI(node);
     }
 
     // This method will create and visualize the connections between the nodes
@@ -97,19 +176,14 @@ public class GraphManager : MonoBehaviour
         // Get the SpriteRenderer component from the instantiated connection
         SpriteRenderer connectionRenderer = connection.GetComponent<SpriteRenderer>();
 
-        // Determine the color based on the target node (node2)
-        string hexColor = GetConnectionColor(node2);
+        //// Determine the color based on the target node (node2)
+        //string hexColor = GetConnectionColor(node2);
 
-        // Parse the hex color string and set it to the connection
-        if (ColorUtility.TryParseHtmlString(hexColor, out Color newColor))
+        if (connectionRenderer != null)
         {
-            connectionRenderer.color = newColor;
-            Debug.Log($"Connection color set to {newColor}");
+            connectionRenderer.enabled = false; // Hide the connection
         }
-        else
-        {
-            Debug.LogError("Invalid hex color code: " + hexColor);
-        }
+    
 
         // Add the connection to the list for later management
         connections.Add(connection);
@@ -172,7 +246,6 @@ public class GraphManager : MonoBehaviour
         {
             Debug.Log($"Moving to Node {targetNode.ID}");
             CurrentNode = targetNode;
-            //TriggerTask(CurrentNode);
 
             HighlightNode(CurrentNode);
 
@@ -198,21 +271,24 @@ public class GraphManager : MonoBehaviour
         }
 
 
-        //activate the messafes ui and set the question
+        //activate the messages ui and set the question
         messageUI.SetActive(true);
         messageText.text = question.questionText;
 
-        optionAButton.GetComponentInChildren<Text>().text = question.optionA;
-        optionBButton.GetComponentInChildren<Text>().text = question.optionB;
 
-        //messageText.text = $"You've clicked Node {node.ID}. Choose your answer:";
+        optionAButton.GetComponent<Image>().sprite = question.optionAImage;
+        optionBButton.GetComponent<Image>().sprite = question.optionBImage;
+        optionCButton.GetComponent<Image>().sprite = question.optionCImage;
+
 
         // Set up the buttons
         optionAButton.onClick.RemoveAllListeners();
         optionBButton.onClick.RemoveAllListeners();
+        optionCButton.onClick.RemoveAllListeners();
 
         optionAButton.onClick.AddListener(() => HandleOptionSelected(node, question, true));
         optionBButton.onClick.AddListener(() => HandleOptionSelected(node, question, false));
+        optionCButton.onClick.AddListener(() => HandleOptionSelected(node, question, null));
 
         // Start the timer for 10 seconds
         if (timerCoroutine != null)
@@ -222,39 +298,141 @@ public class GraphManager : MonoBehaviour
         timerCoroutine = StartCoroutine(AnswerTimer(node, 10f)); // Start a new timer
     }
 
-    private void HandleOptionSelected(Node2D node, QuestionData question, bool isOptionA)
+    private void HandleOptionSelected(Node2D node, QuestionData question, bool? isOptionA)
     {
+        // Check if the node has already been answered
+        if (node.isAnswered)
+        {
+            Debug.Log("This node has already been answered.");
+
+            // Show the spam warning UI for 2 seconds
+            StartCoroutine(ShowSpamWarning());
+            return; // Exit early if the node is already answered
+        }
+
         // Stop the timer as the player has answered
         if (timerCoroutine != null)
         {
             StopCoroutine(timerCoroutine);
         }
 
-        // Example logic for correct or incorrect answers, set node state and Display explanation
-        if (isOptionA == question.isOptionACorrect)
-            //if (isOptionA)
+        // Determine which option was selected
+        if (isOptionA == true && question.isOptionACorrect)
         {
-            Debug.Log("Correct answer!");
-            //explanationText.text = "Option A is correct because...";
-            explanationText.text = question.explanationForCorrect;
-            node.SetGreen(); // Turn the node green
+            Debug.Log("Correct answer! (Option A)");
+            node.SetGreen();
+            greenCount++; // Increment green count
+            Debug.Log($"Green Count: {greenCount} (Node {node.ID} set to Green)");
+        }
+        else if (isOptionA == false && question.isOptionBCorrect)
+        {
+            Debug.Log("Correct answer! (Option B)");
+            node.SetGreen();
+            greenCount++; // Increment green count
+            Debug.Log($"Green Count: {greenCount} (Node {node.ID} set to Green)");
+        }
+        else if (isOptionA == null && question.isOptionCCorrect) // Handle Option C
+        {
+            Debug.Log("Correct answer! (Option C)");
+            node.SetGreen();
+            greenCount++; // Increment green count
+            Debug.Log($"Green Count: {greenCount} (Node {node.ID} set to Green)");
         }
         else
         {
             Debug.Log("Wrong answer.");
-            explanationText.text = question.explanationForIncorrect;
-            //explanationText.text = "Option B is incorrect because...";
-            node.SetRed(); // Turn the node red
+            node.SetRed();
+            redCount++;
+            Debug.Log($"Red Count: {redCount} (Node {node.ID} set to Red)");
         }
 
-        // Show explanation and hide the UI after a short delay
-        StartCoroutine(HideMessageUI());
+        // Delay win condition check until all nodes are processed or specific trigger
+        StartCoroutine(DelayedWinCheck());
     }
 
+    private IEnumerator ShowSpamWarning()
+    {
+        spamWarningText.SetActive(true); // Activate the UI element
+        yield return new WaitForSeconds(2f); // Wait for 2 seconds
+        spamWarningText.SetActive(false); // Deactivate the UI element
+    }
+
+    private IEnumerator DelayedWinCheck()
+    {
+        // Wait for a small delay (if necessary, to allow other processes to complete)
+        yield return new WaitForSeconds(0.1f);
+
+        // Check if all nodes are processed before checking win condition
+        if (allNodesProcessed())
+        {
+            CheckWinCondition();
+        }
+    }
+
+    private bool allNodesProcessed()
+    {
+        foreach (Node2D node in allNodes)
+        {
+            // If the node is neither green nor red, it hasn't been processed
+            if (!node.IsGreen() && !node.IsRed())
+            {
+                return false; // One or more nodes are not processed yet
+            }
+        }
+
+        // All nodes have been processed (green or red)
+        return true;
+    }
+
+    private void CheckWinCondition()
+    {
+        Debug.Log($"Checking win condition: Green Count = {greenCount}, Target = {targetGreenNodesCount}");
+
+        if (greenCount >= targetGreenNodesCount)
+        {
+            Debug.Log("You Win!");
+            ShowWinUI();
+            messageUI.SetActive(false);
+        }
+        else 
+        {
+            Debug.Log("Game Over");
+            ShowLoseUI();
+            messageUI.SetActive(false);
+        }
+    }
+
+    private void ShowWinUI()
+    {
+        winUI.SetActive(true); // Show the "You Win!" UI
+        loseUI.SetActive(false); // Hide the "Game Over" UI
+    }
+    private void ShowLoseUI()
+    {
+        winUI.SetActive(false); // Hide the "You Win!" UI
+        loseUI.SetActive(true); // Show the "Game Over" UI
+    }
+
+    // Set the timer duration for the level
+    private void SetTimerDuration(float duration)
+    {
+        timeRemaining = duration; // Set the initial timer to the duration of the current level
+        UpdateTimerUI(timeRemaining); // Update the UI immediately with the starting time
+    }
     private IEnumerator AnswerTimer(Node2D node, float duration)
     {
-        Debug.Log($"Starting timer for {duration} seconds.");
-        yield return new WaitForSeconds(duration);
+        timeRemaining = duration; // Reset the timer for each question
+
+        // While there is time remaining, update the timer
+        while (timeRemaining > 0)
+        {
+            yield return new WaitForSeconds(1f); // Wait for 1 second
+            timeRemaining--; // Decrease the remaining time
+            UpdateTimerUI(timeRemaining); // Update the timer text on screen
+        }
+
+        //Debug.Log($"Starting timer for {duration} seconds.");
+        //yield return new WaitForSeconds(duration);
 
         // If no answer is selected, mark the node as failed (red)
         Debug.Log($"Time's up! Node {node.ID} has failed.");
@@ -264,47 +442,15 @@ public class GraphManager : MonoBehaviour
         messageUI.SetActive(false);
     }
 
-    private IEnumerator HideMessageUI()
+    // Method to update the UI text with the remaining time
+    private void UpdateTimerUI(float timeLeft)
     {
-        explanationText.gameObject.SetActive(true); // Show the explanation
-        yield return new WaitForSeconds(3f); // Wait for 3 seconds (optional)
-        messageUI.SetActive(false); // Hide the UI
-        explanationText.gameObject.SetActive(false); // Reset the explanation visibility
+        // Convert timeLeft (seconds) into minutes and seconds
+        int minutes = Mathf.FloorToInt(timeLeft / 60);
+        int seconds = Mathf.FloorToInt(timeLeft % 60);
+
+        // Format as "mm:ss"
+        timerText.text = string.Format("{0:00}:{1:00}", minutes, seconds);
     }
 
-
-
-
-
-
-
-
-
-
-    // Trigger task for a node (green/red logic)
-    private void TriggerTask(Node2D node)
-    {
-        bool taskSuccess = Random.value > 0.5f;
-        if (taskSuccess)
-        {
-            node.SetGreen();
-            greenCount++;
-            Debug.Log($"Node {node.ID} turned green!");
-        }
-        else
-        {
-            node.SetRed();
-            redCount++;
-            Debug.Log($"Node {node.ID} turned red!");
-        }
-
-        if (greenCount == allNodes.Count)
-        {
-            Debug.Log("You Win!");
-        }
-        if (redCount == allNodes.Count)
-        {
-            Debug.Log("Game Over");
-        }
-    }
 }

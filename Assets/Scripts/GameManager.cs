@@ -5,10 +5,14 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
+    private LevelManager levelManagerScript;
+    public GameObject phoneScreen;
+
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        levelManagerScript = FindObjectOfType<LevelManager>();
     }
 
     // Update is called once per frame
@@ -31,5 +35,30 @@ public class GameManager : MonoBehaviour
     }
     public void Hide(GameObject panelToHide) {
         panelToHide.SetActive(false);
+    }
+
+    public void LoadLevelOne() {
+        phoneScreen.SetActive(false);
+        levelManagerScript.NextLevel(0);
+    }
+
+    public void LoadLevelTwo() {
+        phoneScreen.SetActive(false);
+        levelManagerScript.NextLevel(1);
+    }
+
+    public void LoadLevelThree() {
+        phoneScreen.SetActive(false);
+        levelManagerScript.NextLevel(2);
+    }
+
+    public void LoadLevelFour() {
+        phoneScreen.SetActive(false);
+        levelManagerScript.NextLevel(3);
+    }
+
+    public void LoadLevelFive() {
+        phoneScreen.SetActive(false);
+        levelManagerScript.NextLevel(4);
     }
 }

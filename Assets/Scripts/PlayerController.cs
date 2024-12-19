@@ -7,6 +7,13 @@ public class PlayerController : MonoBehaviour
     // Manages the player input
     public GraphManager graphManager;
 
+    private void Start()
+    {
+        // Make sure the graphManager is set up correctly at the start
+        // If the level has already instantiated the GraphManager, find it in the current level
+        graphManager = FindObjectOfType<GraphManager>(); // Automatically finds the GraphManager in the scene
+    }
+
     private void Update()
     {
 #if UNITY_ANDROID || UNITY_IOS

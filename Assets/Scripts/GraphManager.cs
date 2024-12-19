@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class GraphManager : MonoBehaviour
@@ -459,6 +460,21 @@ public class GraphManager : MonoBehaviour
 
         // Format as "mm:ss"
         timerText.text = string.Format("{0:00}:{1:00}", minutes, seconds);
+    }
+
+    public void GoToHomeLevel()
+    {
+
+        // Deactivate the current UI to prevent visual glitches
+        winUI.SetActive(false);
+        loseUI.SetActive(false);
+        messageUI.SetActive(false);
+
+        SceneManager.LoadScene("HomeLevel", LoadSceneMode.Single);
+
+        //// Replace "HomeLevel" with the actual name of your home level scene
+        //string homeLevelSceneName = "HomeLevel";
+        //SceneManager.LoadScene(homeLevelSceneName);
     }
 
 }

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -8,7 +9,7 @@ using UnityEngine.UI;
 public class GraphManager : MonoBehaviour
 {
     public Node2D CurrentNode; // Starting node
-    public List<Node2D> allNodes; // List to store all nodes
+    private List<Node2D> allNodes; // List to store all nodes
 
     public List<GameObject> connections; // Store the connection GameObjects for later reference
     public GameObject connectionPrefab; // Reference to the connection sprite prefab
@@ -45,11 +46,33 @@ public class GraphManager : MonoBehaviour
     // This will be called by the LevelManager to initialize the level
     public void InitializeLevel(LevelData levelData)
     {
-        this.levelData = levelData; // Assign level data here
-        SetTimerDuration(levelData.timerDuration); // Set the timer duration for the current level
-        allNodes = levelData.nodes; // Set the nodes for this level
-        CurrentNode = levelData.startNode; // Set the starting node
-        targetGreenNodesCount = levelData.targetGreenNodesCount; // Initialize target green nodes count
+    
+        if (levelData == null)
+        {
+            Debug.LogError("levelData is null!");
+            return;
+        }
+
+        this.levelData = levelData;
+        SetTimerDuration(levelData.timerDuration);
+
+        if (levelData.nodes == null || levelData.nodes.Count == 0)
+        {
+            Debug.LogError("levelData.nodes is null or empty!");
+            return;
+        }
+
+        allNodes = levelData.nodes;
+        CurrentNode = levelData.startNode;
+
+        if (CurrentNode == null)
+        {
+            Debug.LogError("startNode is null in levelData!");
+            return;
+        }
+
+        targetGreenNodesCount = levelData.targetGreenNodesCount;
+
 
         // Reset green and red counts
         greenCount = 0;
@@ -137,19 +160,66 @@ public class GraphManager : MonoBehaviour
     }
 
     // This method will create and visualize the connections between the nodes
+    //public void SetConnections()
+    //{
+    //    //Debug.Log($"Checking connections for Node {node.ID}.");
+    //    foreach (Node2D node in allNodes)
+    //    {
+    //        Debug.Log($"Checking connections for Node {node.ID}.");
+    //        // Loop through each node's connected nodes
+    //        foreach (Node2D connectedNode in node.ConnectedNodes)
+    //        {
+    //            Debug.Log($"Creating connection from Node {node.ID} to Node {connectedNode.ID}.");
+    //            CreateConnection(node, connectedNode); // Create the connection between node and connectedNode
+    //        }
+    //    }
+
+    //}
+
+
     public void SetConnections()
     {
+        HashSet<string> connectionsSet = new HashSet<string>(); // To track created connections and avoid duplicates
+
         foreach (Node2D node in allNodes)
         {
             Debug.Log($"Checking connections for Node {node.ID}.");
+
             // Loop through each node's connected nodes
             foreach (Node2D connectedNode in node.ConnectedNodes)
             {
-                Debug.Log($"Creating connection from Node {node.ID} to Node {connectedNode.ID}.");
-                CreateConnection(node, connectedNode); // Create the connection between node and connectedNode
+                // Generate a unique string identifier for the connection between node and connectedNode
+                string connectionKey = GetConnectionKey(node, connectedNode);
+
+                // Check if this connection has already been created
+                if (!connectionsSet.Contains(connectionKey))
+                {
+                    // Add the connection key to the HashSet
+                    connectionsSet.Add(connectionKey);
+
+                    // Create the connection if it's unique
+                    Debug.Log($"Creating connection from Node {node.ID} to Node {connectedNode.ID}.");
+                    CreateConnection(node, connectedNode); // Create the connection between node and connectedNode
+                }
+                else
+                {
+                    Debug.Log($"Connection from Node {node.ID} to Node {connectedNode.ID} already exists. Skipping.");
+                }
             }
         }
     }
+
+    // Helper method to generate a unique key for each connection
+    private string GetConnectionKey(Node2D node1, Node2D node2)
+    {
+        // Sort the node IDs to ensure the key is the same regardless of direction
+        int id1 = Mathf.Min(node1.ID, node2.ID);
+        int id2 = Mathf.Max(node1.ID, node2.ID);
+
+        return $"{id1}-{id2}"; // Return a unique key based on the node IDs
+    }
+
+
 
     // This method instantiates a connection (sprite/line) between two nodes
     public void CreateConnection(Node2D node1, Node2D node2)
@@ -186,7 +256,7 @@ public class GraphManager : MonoBehaviour
 
         if (connectionRenderer != null)
         {
-            connectionRenderer.enabled = false; // Hide the connection
+            connectionRenderer.enabled = true; // Hide the connection
         }
     
 
@@ -246,8 +316,10 @@ public class GraphManager : MonoBehaviour
 
     public void MoveToNode(Node2D targetNode)
     {
-        if (CurrentNode != null && CurrentNode != targetNode)
-            //if (CurrentNode.ConnectedNodes.Contains(targetNode))
+        if (CurrentNode != null && CurrentNode != targetNode && CurrentNode.ConnectedNodes.Contains(targetNode))
+
+        //if (CurrentNode != null && CurrentNode != targetNode)
+        //if (CurrentNode.ConnectedNodes.Contains(targetNode))
         {
             Debug.Log($"Moving to Node {targetNode.ID}");
             CurrentNode = targetNode;

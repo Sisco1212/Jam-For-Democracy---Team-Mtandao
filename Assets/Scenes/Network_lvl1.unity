@@ -1750,6 +1750,7 @@ MonoBehaviour:
   - {fileID: 1344667678}
   - {fileID: 1205524232}
   - {fileID: 2011939682}
+  - {fileID: 115195666}
   assignedQuestion: {fileID: 11400000, guid: 6fb656874da51c442a014a4293913739, type: 2}
   neutralSprite: {fileID: 21300000, guid: cbc1ad435ce72ed4ea2da2f060721112, type: 3}
   redSprite: {fileID: 21300000, guid: 043fd74f9a2bc7243a26180ffe8f5a4f, type: 3}
@@ -3255,7 +3256,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 26744c5f4ec0a534ab3b48829f2e0d48, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  graphManager: {fileID: 511891084}
+  graphManager: {fileID: 617211057743476914, guid: a83e9f187fd9c06479e6a40a2cb4464b, type: 3}
 --- !u!4 &204263483
 Transform:
   m_ObjectHideFlags: 0
@@ -3863,7 +3864,7 @@ MonoBehaviour:
   - {fileID: 493091589}
   - {fileID: 1859784965}
   currentLevel: 0
-  graphManagerPrefab: {fileID: 2766833086472057102, guid: a83e9f187fd9c06479e6a40a2cb4464b, type: 3}
+  graphManagerPrefab: {fileID: 2101421584}
 --- !u!4 &237684349
 Transform:
   m_ObjectHideFlags: 0
@@ -6536,7 +6537,7 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  m_hasFontAssetChanged: 1
+  m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
 --- !u!222 &422319539
@@ -6902,6 +6903,10 @@ PrefabInstance:
       propertyPath: allNodes.Array.data[3]
       value: 
       objectReference: {fileID: 115195666}
+    - target: {fileID: 617211057743476914, guid: a83e9f187fd9c06479e6a40a2cb4464b, type: 3}
+      propertyPath: connections.Array.size
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2766833086472057102, guid: a83e9f187fd9c06479e6a40a2cb4464b, type: 3}
       propertyPath: m_Name
       value: GraphManager (1)
@@ -7844,17 +7849,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 504096082}
   m_CullTransparentMesh: 1
---- !u!114 &511891084 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 617211057743476914, guid: a83e9f187fd9c06479e6a40a2cb4464b, type: 3}
-  m_PrefabInstance: {fileID: 1213383643182709541}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 35de85095da398448b5f8ed7a7d28f07, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &520166037
 GameObject:
   m_ObjectHideFlags: 0
@@ -18322,7 +18316,7 @@ PrefabInstance:
     - target: {fileID: 617211057743476914, guid: a83e9f187fd9c06479e6a40a2cb4464b, type: 3}
       propertyPath: levelData
       value: 
-      objectReference: {fileID: 1859784966}
+      objectReference: {fileID: 0}
     - target: {fileID: 617211057743476914, guid: a83e9f187fd9c06479e6a40a2cb4464b, type: 3}
       propertyPath: messageUI
       value: 
@@ -19548,6 +19542,7 @@ MonoBehaviour:
   - {fileID: 1344667678}
   - {fileID: 2011939682}
   - {fileID: 115195666}
+  - {fileID: 1205524232}
   assignedQuestion: {fileID: 11400000, guid: dece9322a3908bb41b6156c67b411e63, type: 2}
   neutralSprite: {fileID: 21300000, guid: cbc1ad435ce72ed4ea2da2f060721112, type: 3}
   redSprite: {fileID: 21300000, guid: 043fd74f9a2bc7243a26180ffe8f5a4f, type: 3}
@@ -22072,6 +22067,7 @@ MonoBehaviour:
   - {fileID: 2011939682}
   - {fileID: 1205524232}
   - {fileID: 115195666}
+  - {fileID: 1344667678}
   assignedQuestion: {fileID: 11400000, guid: 4c5eb02d04e226f4cadb731cbc388cd5, type: 2}
   neutralSprite: {fileID: 21300000, guid: cbc1ad435ce72ed4ea2da2f060721112, type: 3}
   redSprite: {fileID: 21300000, guid: 043fd74f9a2bc7243a26180ffe8f5a4f, type: 3}
@@ -24022,6 +24018,10 @@ PrefabInstance:
       propertyPath: allNodes.Array.data[4]
       value: 
       objectReference: {fileID: 1784110370}
+    - target: {fileID: 617211057743476914, guid: a83e9f187fd9c06479e6a40a2cb4464b, type: 3}
+      propertyPath: connections.Array.size
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2766833086472057102, guid: a83e9f187fd9c06479e6a40a2cb4464b, type: 3}
       propertyPath: m_Name
       value: GraphManager
@@ -29504,6 +29504,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1859784967}
   - component: {fileID: 1859784966}
+  - component: {fileID: 1859784968}
   m_Layer: 0
   m_Name: LEVEL 5 (whole family)
   m_TagString: Untagged
@@ -29541,7 +29542,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: cf8d006050ea94041980af69be48a1d7, type: 2}
   - {fileID: 11400000, guid: 61e6ac2181080d442981df06ff10855b, type: 2}
   targetGreenNodesCount: 6
-  timerDuration: 4
+  timerDuration: 40
 --- !u!4 &1859784967
 Transform:
   m_ObjectHideFlags: 0
@@ -29561,6 +29562,14 @@ Transform:
   - {fileID: 639002338}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!222 &1859784968
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1859784965}
+  m_CullTransparentMesh: 1
 --- !u!1 &1864238069
 GameObject:
   m_ObjectHideFlags: 0
@@ -32272,6 +32281,7 @@ MonoBehaviour:
   - {fileID: 1344667678}
   - {fileID: 1205524232}
   - {fileID: 115195666}
+  - {fileID: 2011939682}
   assignedQuestion: {fileID: 11400000, guid: 52a75b6419ab4984dab2ff8b54b39a4e, type: 2}
   neutralSprite: {fileID: 21300000, guid: cbc1ad435ce72ed4ea2da2f060721112, type: 3}
   redSprite: {fileID: 21300000, guid: 043fd74f9a2bc7243a26180ffe8f5a4f, type: 3}
@@ -34135,6 +34145,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2094932928}
   m_CullTransparentMesh: 1
+--- !u!1 &2101421584 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2766833086472057102, guid: a83e9f187fd9c06479e6a40a2cb4464b, type: 3}
+  m_PrefabInstance: {fileID: 1213383643182709541}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2105087813
 GameObject:
   m_ObjectHideFlags: 0

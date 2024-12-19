@@ -41,10 +41,16 @@ public class LevelManager : MonoBehaviour
         }
 
         // Instantiate a new GraphManager for this level
-        currentGraphManager = Instantiate(graphManagerPrefab, levelObjects[currentLevel].transform).GetComponent<GraphManager>();
+        //currentGraphManager = Instantiate(graphManagerPrefab, levelObjects[currentLevel].transform).GetComponent<GraphManager>(); // this line is causing an error by creating a new graph  instance (clone)
+        currentGraphManager = levelObjects[currentLevel].GetComponentInChildren<GraphManager>();
+        if (currentGraphManager == null)
+        {
+            Debug.LogError($"GraphManager is missing on {levelObjects[currentLevel].name}");
+            return;
+            }
 
-        // Initialize GraphManager with this level's data
-        currentGraphManager.InitializeLevel(levelData);
+            // Initialize GraphManager with this level's data
+            currentGraphManager.InitializeLevel(levelData);
 
         // Reset nodes for the new level
         currentGraphManager.ResetNodesForNewLevel();

@@ -11,7 +11,16 @@ public class PlayerController : MonoBehaviour
     {
         // Make sure the graphManager is set up correctly at the start
         // If the level has already instantiated the GraphManager, find it in the current level
-        graphManager = FindObjectOfType<GraphManager>(); // Automatically finds the GraphManager in the scene
+        //graphManager = FindObjectOfType<GraphManager>(); // Automatically finds the GraphManager in the scene
+        if (graphManager == null)
+        {
+            graphManager = FindObjectOfType<GraphManager>();
+        }
+
+        if (graphManager == null)
+        {
+            Debug.LogError("GraphManager not found! Make sure it is assigned in the Inspector or available in the scene.");
+        }
     }
 
     private void Update()
@@ -22,7 +31,7 @@ public class PlayerController : MonoBehaviour
             Touch touch = Input.GetTouch(0); //get the first touch
             // Convert touch position to world space
             Vector2 touchPos = Camera.main.ScreenToWorldPoint(touch.position);
-            Debug.Log("Touch position: " + touchPos);
+            //Debug.Log("Touch position: " + touchPos);
 
             RaycastHit2D hit = Physics2D.Raycast(touchPos, Vector2.zero);
 

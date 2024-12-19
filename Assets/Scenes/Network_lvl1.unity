@@ -1144,7 +1144,8 @@ MonoBehaviour:
   ConnectedNodes:
   - {fileID: 1344667678}
   - {fileID: 1205524232}
-  assignedQuestion: {fileID: 11400000, guid: 1fb4015ad29dd1f4d9c7d0d4095cf860, type: 2}
+  - {fileID: 2011939682}
+  assignedQuestion: {fileID: 11400000, guid: 6fb656874da51c442a014a4293913739, type: 2}
   neutralSprite: {fileID: 21300000, guid: cbc1ad435ce72ed4ea2da2f060721112, type: 3}
   redSprite: {fileID: 21300000, guid: 043fd74f9a2bc7243a26180ffe8f5a4f, type: 3}
   greenSprite: {fileID: 21300000, guid: 2650bb5a55355874488b81dfc1899ef8, type: 3}
@@ -2447,6 +2448,9 @@ MonoBehaviour:
   levelObjects:
   - {fileID: 562693869}
   - {fileID: 1548326439}
+  - {fileID: 820453874}
+  - {fileID: 493091589}
+  - {fileID: 1859784965}
   currentLevel: 0
   graphManagerPrefab: {fileID: 2766833086472057102, guid: a83e9f187fd9c06479e6a40a2cb4464b, type: 3}
 --- !u!4 &237684349
@@ -4832,7 +4836,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &493091590
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5402,7 +5406,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &562693870
 Transform:
   m_ObjectHideFlags: 0
@@ -5441,10 +5445,10 @@ MonoBehaviour:
   - {fileID: 115195666}
   startNode: {fileID: 1344667678}
   questions:
-  - {fileID: 11400000, guid: 77b72609acef5544cb3261949fd6ab98, type: 2}
-  - {fileID: 11400000, guid: 7a167e05552a0d9409068800879fc069, type: 2}
-  - {fileID: 11400000, guid: 0a138dd77e5df274dacd8f7cb817e590, type: 2}
-  - {fileID: 11400000, guid: 1fb4015ad29dd1f4d9c7d0d4095cf860, type: 2}
+  - {fileID: 11400000, guid: 4c5eb02d04e226f4cadb731cbc388cd5, type: 2}
+  - {fileID: 11400000, guid: 52a75b6419ab4984dab2ff8b54b39a4e, type: 2}
+  - {fileID: 11400000, guid: dece9322a3908bb41b6156c67b411e63, type: 2}
+  - {fileID: 11400000, guid: 6fb656874da51c442a014a4293913739, type: 2}
   targetGreenNodesCount: 3
   timerDuration: 5
 --- !u!1 &564028170
@@ -13809,7 +13813,7 @@ MonoBehaviour:
   - {fileID: 1344667678}
   - {fileID: 2011939682}
   - {fileID: 115195666}
-  assignedQuestion: {fileID: 11400000, guid: 0a138dd77e5df274dacd8f7cb817e590, type: 2}
+  assignedQuestion: {fileID: 11400000, guid: dece9322a3908bb41b6156c67b411e63, type: 2}
   neutralSprite: {fileID: 21300000, guid: cbc1ad435ce72ed4ea2da2f060721112, type: 3}
   redSprite: {fileID: 21300000, guid: 043fd74f9a2bc7243a26180ffe8f5a4f, type: 3}
   greenSprite: {fileID: 21300000, guid: 2650bb5a55355874488b81dfc1899ef8, type: 3}
@@ -15597,7 +15601,7 @@ MonoBehaviour:
   - {fileID: 2011939682}
   - {fileID: 1205524232}
   - {fileID: 115195666}
-  assignedQuestion: {fileID: 11400000, guid: 77b72609acef5544cb3261949fd6ab98, type: 2}
+  assignedQuestion: {fileID: 11400000, guid: 4c5eb02d04e226f4cadb731cbc388cd5, type: 2}
   neutralSprite: {fileID: 21300000, guid: cbc1ad435ce72ed4ea2da2f060721112, type: 3}
   redSprite: {fileID: 21300000, guid: 043fd74f9a2bc7243a26180ffe8f5a4f, type: 3}
   greenSprite: {fileID: 21300000, guid: 2650bb5a55355874488b81dfc1899ef8, type: 3}
@@ -16435,7 +16439,7 @@ MonoBehaviour:
   m_text: 00:00
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: b6ee6aba18b1a8d4f8d9631432f75350, type: 2}
-  m_sharedMaterial: {fileID: -1755372155280445087, guid: 6fd9aaee74922b4459b33ff9d11519b3, type: 2}
+  m_sharedMaterial: {fileID: 7960185517551179538, guid: b6ee6aba18b1a8d4f8d9631432f75350, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -22570,8 +22574,9 @@ MonoBehaviour:
   ID: 1
   ConnectedNodes:
   - {fileID: 1344667678}
+  - {fileID: 1205524232}
   - {fileID: 115195666}
-  assignedQuestion: {fileID: 11400000, guid: 7a167e05552a0d9409068800879fc069, type: 2}
+  assignedQuestion: {fileID: 11400000, guid: 52a75b6419ab4984dab2ff8b54b39a4e, type: 2}
   neutralSprite: {fileID: 21300000, guid: cbc1ad435ce72ed4ea2da2f060721112, type: 3}
   redSprite: {fileID: 21300000, guid: 043fd74f9a2bc7243a26180ffe8f5a4f, type: 3}
   greenSprite: {fileID: 21300000, guid: 2650bb5a55355874488b81dfc1899ef8, type: 3}

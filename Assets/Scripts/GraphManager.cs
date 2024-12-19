@@ -50,6 +50,33 @@ public class GraphManager : MonoBehaviour
         //toogle messages UI visibility off on start
         messageUI.SetActive(false); 
 
+<<<<<<< Updated upstream
+=======
+        //add listener to the starting node to trigger ShowMessages when clicked
+        //CurrentNode.OnClick += () => ShowMessageUI(CurrentNode);
+        CurrentNode.OnClick += () => OnFirstNodeClick(CurrentNode);
+
+    }
+
+
+
+    private void OnFirstNodeClick(Node2D node)
+    {
+        // Check if the timer has already been started
+        if (!isTimerStarted)
+        {
+            // Start the timer only once
+            isTimerStarted = true;
+            if (timerCoroutine != null)
+            {
+                StopCoroutine(timerCoroutine); // Stop any existing timers
+            }
+            timerCoroutine = StartCoroutine(AnswerTimer(node, levelData.timerDuration)); // Start the timer for the selected node
+        }
+
+        // Now show the message UI and proceed with the usual flow
+        ShowMessageUI(node);
+>>>>>>> Stashed changes
     }
 
     // This method will create and visualize the connections between the nodes
@@ -219,16 +246,16 @@ public class GraphManager : MonoBehaviour
         {
             StopCoroutine(timerCoroutine); // Stop any existing timers
         }
-        timerCoroutine = StartCoroutine(AnswerTimer(node, 10f)); // Start a new timer
+        timerCoroutine = StartCoroutine(AnswerTimer(node, levelData.timerDuration)); // Start a new timer
     }
 
     private void HandleOptionSelected(Node2D node, QuestionData question, bool isOptionA)
     {
         // Stop the timer as the player has answered
-        if (timerCoroutine != null)
-        {
-            StopCoroutine(timerCoroutine);
-        }
+        //if (timerCoroutine != null)
+        //{
+        //    StopCoroutine(timerCoroutine);
+        //}
 
         // Example logic for correct or incorrect answers, set node state and Display explanation
         if (isOptionA == question.isOptionACorrect)
@@ -247,14 +274,38 @@ public class GraphManager : MonoBehaviour
             node.SetRed(); // Turn the node red
         }
 
+<<<<<<< Updated upstream
         // Show explanation and hide the UI after a short delay
         StartCoroutine(HideMessageUI());
+=======
+        // Start or update the timer for the next question or node
+        if (timerCoroutine != null)
+        {
+            StopCoroutine(timerCoroutine); // Optional: If you want to reset the timer when answering
+        }
+        timerCoroutine = StartCoroutine(AnswerTimer(node, levelData.timerDuration)); // Restart timer after answering
+
+        // Delay win condition check until all nodes are processed or specific trigger
+        StartCoroutine(DelayedWinCheck());
+>>>>>>> Stashed changes
     }
 
     private IEnumerator AnswerTimer(Node2D node, float duration)
     {
+<<<<<<< Updated upstream
         Debug.Log($"Starting timer for {duration} seconds.");
         yield return new WaitForSeconds(duration);
+=======
+        timeRemaining = duration; // Reset the timer for each question
+
+        // While there is time remaining, update the timer
+        while (timeRemaining > 0)
+        {
+            yield return new WaitForSeconds(1f); // Wait for 1 second
+            timeRemaining--; // Decrease the remaining time
+            UpdateTimerUI(timeRemaining); // Update the timer text on screen
+        }
+>>>>>>> Stashed changes
 
         // If no answer is selected, mark the node as failed (red)
         Debug.Log($"Time's up! Node {node.ID} has failed.");

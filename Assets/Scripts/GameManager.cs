@@ -61,4 +61,9 @@ public class GameManager : MonoBehaviour
         phoneScreen.SetActive(false);
         levelManagerScript.NextLevel(4);
     }
+   
+    public void QuitLevel() {
+        phoneScreen.SetActive(true);
+        levelManagerScript.currentLevel = -1;
+    }
 }

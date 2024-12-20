@@ -45,11 +45,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CurrentNode: {fileID: 0}
-  allNodes:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  allNodes: []
   connections: []
   connectionPrefab: {fileID: 3479233865978937361, guid: 9cd20818e5d41d645af918034d3eb74c, type: 3}
   glowingCirclePrefab: {fileID: 1133159639224292061, guid: 39ae5450ea298ab4aa8a5a62839b0d7c, type: 3}

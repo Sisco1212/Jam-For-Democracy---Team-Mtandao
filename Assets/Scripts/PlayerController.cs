@@ -4,22 +4,16 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    // Manages the player input
-    public GraphManager graphManager;
+    // Reference to the GraphManager for this level
+    [SerializeField] private GraphManager graphManager;
 
     private void Start()
     {
-        // Make sure the graphManager is set up correctly at the start
-        // If the level has already instantiated the GraphManager, find it in the current level
-        //graphManager = FindObjectOfType<GraphManager>(); // Automatically finds the GraphManager in the scene
+        // Ensure the GraphManager is set when the level is active
         if (graphManager == null)
         {
-            graphManager = FindObjectOfType<GraphManager>();
-        }
-
-        if (graphManager == null)
-        {
-            Debug.LogError("GraphManager not found! Make sure it is assigned in the Inspector or available in the scene.");
+            Debug.LogError("GraphManager is not assigned for this level.");
+            return;
         }
     }
 
@@ -28,57 +22,41 @@ public class PlayerController : MonoBehaviour
 #if UNITY_ANDROID || UNITY_IOS
         if (Input.touchCount > 0)
         {
-            Touch touch = Input.GetTouch(0); //get the first touch
-            // Convert touch position to world space
+            Touch touch = Input.GetTouch(0); // Get the first touch
             Vector2 touchPos = Camera.main.ScreenToWorldPoint(touch.position);
-            //Debug.Log("Touch position: " + touchPos);
-
             RaycastHit2D hit = Physics2D.Raycast(touchPos, Vector2.zero);
 
             if (hit.collider != null)
             {
-                Debug.Log("Hit a collider: " + hit.collider.name);
-
                 Node2D touchedNode = hit.collider.GetComponent<Node2D>();
-                if (touchedNode != null)
+                if (touchedNode != null && graphManager != null)
                 {
-                    Debug.Log("Touched Node2D: " + touchedNode.name);
                     graphManager.MoveToNode(touchedNode);
                 }
                 else
                 {
-                    Debug.Log("Hit object is not a Node2D."); // Debug log if the hit object is not a Node2D
+                    Debug.LogError("Touched Node2D or GraphManager is null.");
                 }
             }
         }
 #else
-        // If the platform does not support touch (e.g., desktop)
-        // Check if the left mouse button is clicked (0 is the left mouse button)
         if (Input.GetMouseButtonDown(0))
         {
             Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            Debug.Log("Mouse position: " + mousePos);
             RaycastHit2D hit = Physics2D.Raycast(mousePos, Vector2.zero);
 
-            if(hit.collider != null)
-            { 
-                Debug.Log("Hit a collider: " + hit.collider.name);
-
+            if (hit.collider != null)
+            {
                 Node2D clickedNode = hit.collider.GetComponent<Node2D>();
-                if(clickedNode != null)
+                if (clickedNode != null && graphManager != null)
                 {
-                    Debug.Log("Clicked Node2D: " + clickedNode.name);
                     graphManager.MoveToNode(clickedNode);
                 }
                 else
                 {
-                   Debug.Log("Hit object is not a Node2D."); // Debug log if the hit object is not a Node2D
+                    Debug.LogError("Clicked Node2D or GraphManager is null.");
                 }
             }
-            else
-                {
-                    Debug.Log("No collider hit."); // Debug log if the raycast hit nothing
-                }
         }
 #endif
     }

@@ -5,7 +5,7 @@ using UnityEngine;
 public class LevelManager : MonoBehaviour
 {
     public List<GameObject> levelObjects; // List of Empty GameObjects for levels
-    public int currentLevel; // Track the current level
+    public int currentLevel = 0; // Track the current level
 
     public GameObject graphManagerPrefab; // Reference to the GraphManager prefab
 
@@ -33,29 +33,28 @@ public class LevelManager : MonoBehaviour
         levelObjects[currentLevel].SetActive(true);
 
         // Initialize the level's data (nodes, questions, etc.)
-        LevelData levelData = levelObjects[currentLevel].GetComponent<LevelData>(); // Assuming LevelData is attached to the Empty GameObject
-                                                                                    // Destroy the previous GraphManager (if exists)
-        if (currentGraphManager != null)
-        {
-            Destroy(currentGraphManager.gameObject);
-        }
+        LevelData levelData = levelObjects[currentLevel].GetComponent<LevelData>();
 
-        // Instantiate a new GraphManager for this level
-        //currentGraphManager = Instantiate(graphManagerPrefab, levelObjects[currentLevel].transform).GetComponent<GraphManager>(); // this line is causing an error by creating a new graph  instance (clone)
+        // Get the GraphManager from the current level (it should already be a child)
         currentGraphManager = levelObjects[currentLevel].GetComponentInChildren<GraphManager>();
+
+        // If no GraphManager exists in this level (shouldn't happen if set up correctly), instantiate a new one
         if (currentGraphManager == null)
         {
-            Debug.LogError($"GraphManager is missing on {levelObjects[currentLevel].name}");
-            return;
-            }
+            Debug.LogWarning("No GraphManager found in this level. Instantiating a new one.");
+            currentGraphManager = Instantiate(graphManagerPrefab, levelObjects[currentLevel].transform).GetComponent<GraphManager>();
+        }
+        else
+        {
+            // Optionally reset or reinitialize the existing GraphManager if necessary
+            currentGraphManager.ResetNodesForNewLevel();
+        }
 
-            // Initialize GraphManager with this level's data
-            currentGraphManager.InitializeLevel(levelData);
-
-        // Reset nodes for the new level
-        currentGraphManager.ResetNodesForNewLevel();
+        // Initialize GraphManager with this level's data
+        currentGraphManager.InitializeLevel(levelData);
     }
 
+    // Call this to move to the next level (Assumes one moves to level 2 directly from level 1)
     // Call this to move to the next level (Assumes one moves to level 2 directly from level 1)
     public void NextLevel(int levelToStart)
     {

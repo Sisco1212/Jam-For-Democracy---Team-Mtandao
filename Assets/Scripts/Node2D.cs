@@ -7,7 +7,8 @@ using UnityEngine.EventSystems;
 public class Node2D : MonoBehaviour
 {
     public int ID;
-    public List<Node2D> ConnectedNodes; //list of nodes connected to this one
+    public List<Node2D> ConnectedNodes = new List<Node2D>(); //list of nodes connected to this one
+    //public List<Node2D> ConnectedNodes; //list of nodes connected to this one
 
     public QuestionData assignedQuestion; // The question assigned to this node
 
@@ -108,6 +109,8 @@ public class Node2D : MonoBehaviour
             Debug.Log("Node has already been answered. Cannot change.");
             return; // Early exit to prevent further clicks
         }
+
+        
 
         // Trigger the OnClick event when the node is clicked
         OnClick?.Invoke();

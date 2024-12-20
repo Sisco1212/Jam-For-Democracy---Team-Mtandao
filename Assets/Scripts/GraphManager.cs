@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -9,7 +8,7 @@ using UnityEngine.UI;
 public class GraphManager : MonoBehaviour
 {
     public Node2D CurrentNode; // Starting node
-    private List<Node2D> allNodes; // List to store all nodes
+    public List<Node2D> allNodes; // List to store all nodes
 
     public List<GameObject> connections; // Store the connection GameObjects for later reference
     public GameObject connectionPrefab; // Reference to the connection sprite prefab
@@ -43,36 +42,69 @@ public class GraphManager : MonoBehaviour
     private int greenCount = 0;
     private int redCount = 0;
 
+
+
+    private void Start()
+    {
+        InitializeLevel(levelData);
+        SetTimerDuration(levelData.timerDuration); // Set the timer duration for the current level
+
+        // Find the node with a specific ID or randomly select one
+        int targetID = 0;
+        CurrentNode = allNodes.Find(node => node.ID == targetID);
+
+        if (allNodes == null || allNodes.Count == 0)
+        {
+            Debug.LogError("No nodes available to assign as the CurrentNode.");
+            return;
+        }
+
+        //Ensure CurrentNode is assigned before use, either through editor or dynamically
+        if (CurrentNode == null)
+        {
+            Debug.LogWarning($"Node with ID {targetID} not found! Defaulting to the first node.");
+            CurrentNode = allNodes[0]; // Default to the first node
+
+        }
+
+        if (CurrentNode != null)
+        {
+            Debug.Log($"Starting node set to {CurrentNode.ID} (found by ID)");
+        }
+        else
+        {
+            Debug.LogWarning($"Node with ID {targetID} not found! Defaulting to a random node.");
+            CurrentNode = allNodes[Random.Range(0, allNodes.Count)];
+        }
+
+
+        HighlightNode(CurrentNode); // Highlight the active node with the particle effect on start
+        SetConnections(); // Set the connections for the nodes (visualize them)
+
+        //toogle messages UI visibility off on start
+        messageUI.SetActive(false);
+
+        //add listener to the starting node to trigger ShowMessages when clicked
+        //CurrentNode.OnClick += () => ShowMessageUI(CurrentNode);
+        CurrentNode.OnClick += () => OnFirstNodeClick(CurrentNode);
+
+    }
+
     // This will be called by the LevelManager to initialize the level
     public void InitializeLevel(LevelData levelData)
     {
-    
-        if (levelData == null)
-        {
-            Debug.LogError("levelData is null!");
-            return;
-        }
-
-        this.levelData = levelData;
-        SetTimerDuration(levelData.timerDuration);
+        this.levelData = levelData; // Assign level data here
 
         if (levelData.nodes == null || levelData.nodes.Count == 0)
         {
-            Debug.LogError("levelData.nodes is null or empty!");
+            Debug.LogError("Level data nodes are not assigned or empty!");
             return;
         }
 
-        allNodes = levelData.nodes;
-        CurrentNode = levelData.startNode;
-
-        if (CurrentNode == null)
-        {
-            Debug.LogError("startNode is null in levelData!");
-            return;
-        }
-
-        targetGreenNodesCount = levelData.targetGreenNodesCount;
-
+        SetTimerDuration(levelData.timerDuration); // Set the timer duration for the current level
+        allNodes = levelData.nodes; // Set the nodes for this level
+        CurrentNode = levelData.startNode; // Set the starting node
+        targetGreenNodesCount = levelData.targetGreenNodesCount; // Initialize target green nodes count
 
         // Reset green and red counts
         greenCount = 0;
@@ -87,6 +119,11 @@ public class GraphManager : MonoBehaviour
 
         // Activate the message UI off at the start
         messageUI.SetActive(false);
+
+        if (levelData == null || levelData.nodes == null || levelData.nodes.Count == 0)
+        {
+            Debug.LogError("Level data or nodes are not properly initialized!");
+        }
     }
 
 
@@ -108,36 +145,7 @@ public class GraphManager : MonoBehaviour
     }
 
 
-    private void Start()
-    {
-        InitializeLevel(levelData);
-        SetTimerDuration(levelData.timerDuration); // Set the timer duration for the current level
 
-        // Find the node with a specific ID or randomly select one
-        int targetID = 0;
-        CurrentNode = allNodes.Find(node => node.ID == targetID);
-        if (CurrentNode != null)
-        {
-            Debug.Log($"Starting node set to {CurrentNode.ID} (found by ID)");
-        }
-        else
-        {
-            Debug.LogWarning($"Node with ID {targetID} not found! Defaulting to a random node.");
-            CurrentNode = allNodes[Random.Range(0, allNodes.Count)];
-        }
-
-        //TriggerTask(CurrentNode); // Trigger task on starting node
-        HighlightNode(CurrentNode); // Highlight the active node with the particle effect on start
-        SetConnections(); // Set the connections for the nodes (visualize them)
-
-        //toogle messages UI visibility off on start
-        messageUI.SetActive(false);
-
-        //add listener to the starting node to trigger ShowMessages when clicked
-        //CurrentNode.OnClick += () => ShowMessageUI(CurrentNode);
-        CurrentNode.OnClick += () => OnFirstNodeClick(CurrentNode);
-
-    }
 
 
 
@@ -160,66 +168,55 @@ public class GraphManager : MonoBehaviour
     }
 
     // This method will create and visualize the connections between the nodes
-    //public void SetConnections()
-    //{
-    //    //Debug.Log($"Checking connections for Node {node.ID}.");
-    //    foreach (Node2D node in allNodes)
-    //    {
-    //        Debug.Log($"Checking connections for Node {node.ID}.");
-    //        // Loop through each node's connected nodes
-    //        foreach (Node2D connectedNode in node.ConnectedNodes)
-    //        {
-    //            Debug.Log($"Creating connection from Node {node.ID} to Node {connectedNode.ID}.");
-    //            CreateConnection(node, connectedNode); // Create the connection between node and connectedNode
-    //        }
-    //    }
-
-    //}
-
-
     public void SetConnections()
     {
-        HashSet<string> connectionsSet = new HashSet<string>(); // To track created connections and avoid duplicates
+        // Create a HashSet to track connections to avoid duplicates
+        HashSet<string> createdConnections = new HashSet<string>();
 
         foreach (Node2D node in allNodes)
         {
             Debug.Log($"Checking connections for Node {node.ID}.");
+            // Populate `ConnectedNodes` dynamically if not already set
+            if (node.ConnectedNodes == null || node.ConnectedNodes.Count == 0)
+            {
+                node.ConnectedNodes = new List<Node2D>(); // Ensure it is initialized
+                Debug.Log($"Node {node.ID} connections initialized.");
+            }
 
             // Loop through each node's connected nodes
             foreach (Node2D connectedNode in node.ConnectedNodes)
             {
-                // Generate a unique string identifier for the connection between node and connectedNode
-                string connectionKey = GetConnectionKey(node, connectedNode);
+                // Create a unique string to represent the connection (using node IDs to identify the connection)
+                string connectionKey = GetConnectionKey(node.ID, connectedNode.ID);
+
+                // Create connection only if the reverse connection is not present
+                if (!connectedNode.ConnectedNodes.Contains(node))
+                {
+                    connectedNode.ConnectedNodes.Add(node); // Ensure it's bidirectional
+                }
 
                 // Check if this connection has already been created
-                if (!connectionsSet.Contains(connectionKey))
+                if (!createdConnections.Contains(connectionKey))
                 {
-                    // Add the connection key to the HashSet
-                    connectionsSet.Add(connectionKey);
-
-                    // Create the connection if it's unique
-                    Debug.Log($"Creating connection from Node {node.ID} to Node {connectedNode.ID}.");
                     CreateConnection(node, connectedNode); // Create the connection between node and connectedNode
+                    createdConnections.Add(connectionKey); // Mark this connection as created
+
+                    Debug.Log($"Creating connection from Node {node.ID} to Node {connectedNode.ID}.");
                 }
                 else
                 {
-                    Debug.Log($"Connection from Node {node.ID} to Node {connectedNode.ID} already exists. Skipping.");
+                    Debug.Log($"Connection from Node {node.ID} to Node {connectedNode.ID} already exists, skipping.");
                 }
             }
         }
     }
 
-    // Helper method to generate a unique key for each connection
-    private string GetConnectionKey(Node2D node1, Node2D node2)
+    // Helper method to create a unique key for each connection (since the connection is undirected)
+    private string GetConnectionKey(int nodeId1, int nodeId2)
     {
-        // Sort the node IDs to ensure the key is the same regardless of direction
-        int id1 = Mathf.Min(node1.ID, node2.ID);
-        int id2 = Mathf.Max(node1.ID, node2.ID);
-
-        return $"{id1}-{id2}"; // Return a unique key based on the node IDs
+        // Create a key that is unique for the connection between node1 and node2, no matter the order
+        return nodeId1 < nodeId2 ? $"{nodeId1}-{nodeId2}" : $"{nodeId2}-{nodeId1}";
     }
-
-
 
     // This method instantiates a connection (sprite/line) between two nodes
     public void CreateConnection(Node2D node1, Node2D node2)
@@ -258,29 +255,11 @@ public class GraphManager : MonoBehaviour
         {
             connectionRenderer.enabled = true; // Hide the connection
         }
-    
+
 
         // Add the connection to the list for later management
         connections.Add(connection);
         Debug.Log($"Connection from Node {node1.ID} to Node {node2.ID} created and added to the list.");
-    }
-
-    // Helper method to return the color based on the node's state
-    private string GetConnectionColor(Node2D targetNode)
-    {
-        // Check the state of the target node (connected node)
-        if (targetNode.IsGreen())
-        {
-            return "#45FF32"; // Green color (hex)
-        }
-        else if (targetNode.IsRed())
-        {
-            return "#FF0052"; // Red color (hex)
-        }
-        else
-        {
-            return "#0064C5"; // Default blue color (hex) if no specific state
-        }
     }
 
     // Highlight the active node with a particle effect (implement this as per your needs)
@@ -316,10 +295,13 @@ public class GraphManager : MonoBehaviour
 
     public void MoveToNode(Node2D targetNode)
     {
-        if (CurrentNode != null && CurrentNode != targetNode && CurrentNode.ConnectedNodes.Contains(targetNode))
+        //if (CurrentNode == null)
+        //{
+        //    Debug.LogError("CurrentNode is null! Cannot move.");
+        //    return;
+        //}
 
-        //if (CurrentNode != null && CurrentNode != targetNode)
-        //if (CurrentNode.ConnectedNodes.Contains(targetNode))
+        if (CurrentNode.ConnectedNodes.Contains(targetNode))
         {
             Debug.Log($"Moving to Node {targetNode.ID}");
             CurrentNode = targetNode;
@@ -387,12 +369,6 @@ public class GraphManager : MonoBehaviour
             return; // Exit early if the node is already answered
         }
 
-        // Stop the timer as the player has answered
-        //if (timerCoroutine != null)
-        //{
-        //    StopCoroutine(timerCoroutine);
-        //}
-
         // Determine which option was selected
         if (isOptionA == true && question.isOptionACorrect)
         {
@@ -437,7 +413,7 @@ public class GraphManager : MonoBehaviour
     private IEnumerator ShowSpamWarning()
     {
         spamWarningText.SetActive(true); // Activate the UI element
-        yield return new WaitForSeconds(2f); // Wait for 2 seconds
+        yield return new WaitForSeconds(1f); // Wait for 2 seconds
         spamWarningText.SetActive(false); // Deactivate the UI element
     }
 
@@ -478,7 +454,7 @@ public class GraphManager : MonoBehaviour
             ShowWinUI();
             messageUI.SetActive(false);
         }
-        else 
+        else
         {
             Debug.Log("Game Over");
             ShowLoseUI();
@@ -526,6 +502,12 @@ public class GraphManager : MonoBehaviour
     // Method to update the UI text with the remaining time
     private void UpdateTimerUI(float timeLeft)
     {
+        if (timerText == null)
+        {
+            Debug.LogError("Timer Text is not assigned!");
+            return;
+        }
+
         // Convert timeLeft (seconds) into minutes and seconds
         int minutes = Mathf.FloorToInt(timeLeft / 60);
         int seconds = Mathf.FloorToInt(timeLeft % 60);
@@ -536,17 +518,24 @@ public class GraphManager : MonoBehaviour
 
     public void GoToHomeLevel()
     {
+        // Find the Home level GameObject 
+        GameObject homeLevel = GameObject.FindWithTag("PhoneScreen");
 
-        // Deactivate the current UI to prevent visual glitches
-        winUI.SetActive(false);
-        loseUI.SetActive(false);
-        messageUI.SetActive(false);
+        // If the home level GameObject exists, activate it or set it to be active
+        if (homeLevel != null)
+        {
+            homeLevel.SetActive(true);  // Make the Home level GameObject active if it's not
+        }
 
-        SceneManager.LoadScene("HomeLevel", LoadSceneMode.Single);
+        //disable the current active level
+        // Find all game objects with the "Level" tag 
+        GameObject[] levels = GameObject.FindGameObjectsWithTag("Level");
 
-        //// Replace "HomeLevel" with the actual name of your home level scene
-        //string homeLevelSceneName = "HomeLevel";
-        //SceneManager.LoadScene(homeLevelSceneName);
+        // Deactivate each level object (or just the active one if you know which one should be)
+        foreach (GameObject level in levels)
+        {
+            level.SetActive(false);  // Deactivate the level(s)
+        }
+
     }
-
 }

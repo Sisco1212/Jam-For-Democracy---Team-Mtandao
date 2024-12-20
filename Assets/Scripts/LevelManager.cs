@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.VersionControl;
 using UnityEngine;
 
 public class LevelManager : MonoBehaviour
@@ -52,6 +53,10 @@ public class LevelManager : MonoBehaviour
 
         // Initialize GraphManager with this level's data
         currentGraphManager.InitializeLevel(levelData);
+
+        //reset the game NEW CODE
+        currentGraphManager.ResetGame();
+        Debug.Log("Game Reset");
     }
 
     // Call this to move to the next level (Assumes one moves to level 2 directly from level 1)
@@ -59,6 +64,7 @@ public class LevelManager : MonoBehaviour
     public void NextLevel(int levelToStart)
     {
         StartLevel(levelToStart);
+        currentGraphManager.ResetGame();
     }
 
     // Call this to go to a specific level by name
@@ -76,5 +82,8 @@ public class LevelManager : MonoBehaviour
 
         Debug.LogError($"Level with name {levelName} not found!");
     }
+
+
+
 }
 

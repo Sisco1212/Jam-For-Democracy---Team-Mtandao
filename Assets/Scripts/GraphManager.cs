@@ -43,6 +43,7 @@ public class GraphManager : MonoBehaviour
     private int redCount = 0;
 
     public Canvas canvas;  // Reference to the Canvas
+    public GameObject levelBg;
 
     private void Start()
     {
@@ -78,6 +79,7 @@ public class GraphManager : MonoBehaviour
         }
 
 
+
         HighlightNode(CurrentNode); // Highlight the active node with the particle effect on start
         SetConnections(); // Set the connections for the nodes (visualize them)
 
@@ -87,6 +89,43 @@ public class GraphManager : MonoBehaviour
         //add listener to the starting node to trigger ShowMessages when clicked
         //CurrentNode.OnClick += () => ShowMessageUI(CurrentNode);
         CurrentNode.OnClick += () => OnFirstNodeClick(CurrentNode);
+
+        if (levelBg != null)
+        {
+            levelBg.SetActive(true);  // Ensure the background is active
+            Debug.Log("Background activated in Start.");
+        }
+
+    }
+
+
+    //reset game method 
+    public void ResetGame()
+    {
+        // Reset node states (green/red)
+        ResetNodeStates();
+
+        // Reset the counts for green and red nodes
+        greenCount = 0;
+        redCount = 0;
+
+        // Reset the timer
+        if (timerCoroutine != null)
+        {
+            StopCoroutine(timerCoroutine); // Stop any existing timer
+        }
+        SetTimerDuration(levelData.timerDuration); // Reset the timer to its initial duration
+
+        // Reinitialize level setup
+        InitializeLevel(levelData); // Reinitialize the level data and nodes
+
+        // Reset message UI
+        messageUI.SetActive(false); // Deactivate the message UI
+        winUI.SetActive(false); // hide the "You Win!" UI
+        loseUI.SetActive(false); // Hide the "Game Over" UI
+        levelBg.SetActive(true);
+
+        Debug.Log("Game Reset1");
 
     }
 
@@ -466,11 +505,13 @@ public class GraphManager : MonoBehaviour
     {
         winUI.SetActive(true); // Show the "You Win!" UI
         loseUI.SetActive(false); // Hide the "Game Over" UI
+       
     }
     private void ShowLoseUI()
     {
         winUI.SetActive(false); // Hide the "You Win!" UI
         loseUI.SetActive(true); // Show the "Game Over" UI
+       
     }
 
     // Set the timer duration for the level
@@ -518,7 +559,7 @@ public class GraphManager : MonoBehaviour
 
     public void GoToHomeLevel()
     {
-       
+        ResetGame();
 
         //disable the current active level
         // Find all game objects with the "Level" tag 
@@ -528,6 +569,17 @@ public class GraphManager : MonoBehaviour
         foreach (GameObject level in levels)
         {
             level.SetActive(false);  // Deactivate the level(s)
+        }
+
+        // Deactivate the background
+        if (levelBg != null)
+        {
+            levelBg.SetActive(false);  // Deactivate the background
+            Debug.Log("Background deactivated.");
+        }
+        else
+        {
+            Debug.LogError("Level background not assigned! Please assign it in the Inspector.");
         }
 
 
@@ -543,4 +595,11 @@ public class GraphManager : MonoBehaviour
             Debug.LogError("Canvas not assigned! Please assign a Canvas in the Inspector.");
         }
     }
+
+
+
+
+
+
+
 }

@@ -179,7 +179,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: This is the questions text pannel
+  m_text: Youths are leading the protests
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 4adb2da64fdbd3546a6584861eb5ce52, type: 2}
   m_sharedMaterial: {fileID: -4581567383330457821, guid: 4adb2da64fdbd3546a6584861eb5ce52, type: 2}
@@ -5698,7 +5698,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: This is the questions text pannel
+  m_text: Keto diet is bad for people
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 4adb2da64fdbd3546a6584861eb5ce52, type: 2}
   m_sharedMaterial: {fileID: -4581567383330457821, guid: 4adb2da64fdbd3546a6584861eb5ce52, type: 2}
@@ -7900,7 +7900,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: This is the questions text pannel
+  m_text: Grandma is diabetic
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 4adb2da64fdbd3546a6584861eb5ce52, type: 2}
   m_sharedMaterial: {fileID: -4581567383330457821, guid: 4adb2da64fdbd3546a6584861eb5ce52, type: 2}
@@ -8227,7 +8227,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: This is the questions text pannel
+  m_text: Doctors need Maths and Biology
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 4adb2da64fdbd3546a6584861eb5ce52, type: 2}
   m_sharedMaterial: {fileID: -4581567383330457821, guid: 4adb2da64fdbd3546a6584861eb5ce52, type: 2}
@@ -8496,7 +8496,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: This is the questions text pannel
+  m_text: Emeka's sister is not voting
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 4adb2da64fdbd3546a6584861eb5ce52, type: 2}
   m_sharedMaterial: {fileID: -4581567383330457821, guid: 4adb2da64fdbd3546a6584861eb5ce52, type: 2}
@@ -10203,7 +10203,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: This is the questions text pannel
+  m_text: Protests occur on Tuesdays and Thursday
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 4adb2da64fdbd3546a6584861eb5ce52, type: 2}
   m_sharedMaterial: {fileID: -4581567383330457821, guid: 4adb2da64fdbd3546a6584861eb5ce52, type: 2}
@@ -11793,7 +11793,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: This is the questions text pannel
+  m_text: Grandma has epilepsy
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 4adb2da64fdbd3546a6584861eb5ce52, type: 2}
   m_sharedMaterial: {fileID: -4581567383330457821, guid: 4adb2da64fdbd3546a6584861eb5ce52, type: 2}
@@ -12365,7 +12365,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: a7ea76fcbcd5da54d95d1c08e54fd613, type: 2}
   - {fileID: 11400000, guid: a49994e36ec7c3f4db9ec6945da1634a, type: 2}
   targetGreenNodesCount: 6
-  timerDuration: 7
+  timerDuration: 6
 --- !u!4 &493091591
 Transform:
   m_ObjectHideFlags: 0
@@ -15062,7 +15062,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: This is the questions text pannel
+  m_text: Emeka was born with Asthma
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 4adb2da64fdbd3546a6584861eb5ce52, type: 2}
   m_sharedMaterial: {fileID: -4581567383330457821, guid: 4adb2da64fdbd3546a6584861eb5ce52, type: 2}
@@ -17558,7 +17558,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: This is the questions text pannel
+  m_text: Keto diet helps epilepsy
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 4adb2da64fdbd3546a6584861eb5ce52, type: 2}
   m_sharedMaterial: {fileID: -4581567383330457821, guid: 4adb2da64fdbd3546a6584861eb5ce52, type: 2}
@@ -17692,7 +17692,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: This is the questions text pannel
+  m_text: Charli is a pop singer
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 4adb2da64fdbd3546a6584861eb5ce52, type: 2}
   m_sharedMaterial: {fileID: -4581567383330457821, guid: 4adb2da64fdbd3546a6584861eb5ce52, type: 2}
@@ -19343,7 +19343,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: This is the questions text pannel
+  m_text: Burkina Faso is a young democracy
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 4adb2da64fdbd3546a6584861eb5ce52, type: 2}
   m_sharedMaterial: {fileID: -4581567383330457821, guid: 4adb2da64fdbd3546a6584861eb5ce52, type: 2}
@@ -20176,7 +20176,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: This is the questions text pannel
+  m_text: Protestors are below the age of 10
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 4adb2da64fdbd3546a6584861eb5ce52, type: 2}
   m_sharedMaterial: {fileID: -4581567383330457821, guid: 4adb2da64fdbd3546a6584861eb5ce52, type: 2}
@@ -20791,7 +20791,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: This is the questions text pannel
+  m_text: Protests will take part in Uhuru park
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 4adb2da64fdbd3546a6584861eb5ce52, type: 2}
   m_sharedMaterial: {fileID: -4581567383330457821, guid: 4adb2da64fdbd3546a6584861eb5ce52, type: 2}
@@ -23620,7 +23620,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: This is the questions text pannel
+  m_text: Guinea is also a young democracy
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 4adb2da64fdbd3546a6584861eb5ce52, type: 2}
   m_sharedMaterial: {fileID: -4581567383330457821, guid: 4adb2da64fdbd3546a6584861eb5ce52, type: 2}
@@ -26216,7 +26216,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: This is the questions text pannel
+  m_text: Charli XCX is a sister to Billie Eilish
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 4adb2da64fdbd3546a6584861eb5ce52, type: 2}
   m_sharedMaterial: {fileID: -4581567383330457821, guid: 4adb2da64fdbd3546a6584861eb5ce52, type: 2}
@@ -26628,7 +26628,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: This is the questions text pannel
+  m_text: Emeka is voting
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 4adb2da64fdbd3546a6584861eb5ce52, type: 2}
   m_sharedMaterial: {fileID: -4581567383330457821, guid: 4adb2da64fdbd3546a6584861eb5ce52, type: 2}
@@ -27759,7 +27759,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: This is the questions text pannel
+  m_text: Someone in the family has cancer
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 4adb2da64fdbd3546a6584861eb5ce52, type: 2}
   m_sharedMaterial: {fileID: -4581567383330457821, guid: 4adb2da64fdbd3546a6584861eb5ce52, type: 2}
@@ -31372,7 +31372,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: This is the questions text pannel
+  m_text: 'Argentina is one of the youngest democracies '
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 4adb2da64fdbd3546a6584861eb5ce52, type: 2}
   m_sharedMaterial: {fileID: -4581567383330457821, guid: 4adb2da64fdbd3546a6584861eb5ce52, type: 2}
@@ -32208,7 +32208,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: This is the questions text pannel
+  m_text: Charli is a singer
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 4adb2da64fdbd3546a6584861eb5ce52, type: 2}
   m_sharedMaterial: {fileID: -4581567383330457821, guid: 4adb2da64fdbd3546a6584861eb5ce52, type: 2}
@@ -32595,7 +32595,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: This is the questions text pannel
+  m_text: 'Vaccines are poisonous '
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 4adb2da64fdbd3546a6584861eb5ce52, type: 2}
   m_sharedMaterial: {fileID: -4581567383330457821, guid: 4adb2da64fdbd3546a6584861eb5ce52, type: 2}
@@ -34829,7 +34829,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: This is the questions text pannel
+  m_text: Your sister studied biology
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 4adb2da64fdbd3546a6584861eb5ce52, type: 2}
   m_sharedMaterial: {fileID: -4581567383330457821, guid: 4adb2da64fdbd3546a6584861eb5ce52, type: 2}
@@ -35805,7 +35805,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: This is the questions text pannel
+  m_text: Your sister wants to be a dentist
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 4adb2da64fdbd3546a6584861eb5ce52, type: 2}
   m_sharedMaterial: {fileID: -4581567383330457821, guid: 4adb2da64fdbd3546a6584861eb5ce52, type: 2}
@@ -35939,7 +35939,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: This is the questions text pannel
+  m_text: The family doctor is a fraud
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 4adb2da64fdbd3546a6584861eb5ce52, type: 2}
   m_sharedMaterial: {fileID: -4581567383330457821, guid: 4adb2da64fdbd3546a6584861eb5ce52, type: 2}
@@ -36848,7 +36848,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1497255065
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -38781,7 +38781,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: This is the questions text pannel
+  m_text: Emeka is always late
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 4adb2da64fdbd3546a6584861eb5ce52, type: 2}
   m_sharedMaterial: {fileID: -4581567383330457821, guid: 4adb2da64fdbd3546a6584861eb5ce52, type: 2}
@@ -41230,7 +41230,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: This is the questions text pannel
+  m_text: No one trusts your family doctor
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 4adb2da64fdbd3546a6584861eb5ce52, type: 2}
   m_sharedMaterial: {fileID: -4581567383330457821, guid: 4adb2da64fdbd3546a6584861eb5ce52, type: 2}
@@ -45645,7 +45645,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: This is the questions text pannel
+  m_text: "Your father\u2019s colleague is your doctor"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 4adb2da64fdbd3546a6584861eb5ce52, type: 2}
   m_sharedMaterial: {fileID: -4581567383330457821, guid: 4adb2da64fdbd3546a6584861eb5ce52, type: 2}
@@ -47317,7 +47317,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: This is the questions text pannel
+  m_text: She is actually a Reggae singer
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 4adb2da64fdbd3546a6584861eb5ce52, type: 2}
   m_sharedMaterial: {fileID: -4581567383330457821, guid: 4adb2da64fdbd3546a6584861eb5ce52, type: 2}
@@ -47451,7 +47451,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: This is the questions text pannel
+  m_text: You have been studying
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 4adb2da64fdbd3546a6584861eb5ce52, type: 2}
   m_sharedMaterial: {fileID: -4581567383330457821, guid: 4adb2da64fdbd3546a6584861eb5ce52, type: 2}
@@ -51480,7 +51480,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: This is the questions text pannel
+  m_text: Protests will happen on the weekends
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 4adb2da64fdbd3546a6584861eb5ce52, type: 2}
   m_sharedMaterial: {fileID: -4581567383330457821, guid: 4adb2da64fdbd3546a6584861eb5ce52, type: 2}
@@ -51573,7 +51573,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &2106398377
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -51581,7 +51581,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2106398376}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 924ed66850b0ad240a6d5fb80e65f745, type: 3}
   m_Name: 
@@ -51746,7 +51746,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2115472551}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
@@ -51756,7 +51756,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 50, y: 50}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
 --- !u!114 &2115472553

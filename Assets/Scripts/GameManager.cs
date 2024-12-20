@@ -7,12 +7,15 @@ public class GameManager : MonoBehaviour
 {
     private LevelManager levelManagerScript;
     public GameObject phoneScreen;
+    public int nextSceneLoad;
 
 
     // Start is called before the first frame update
     void Start()
     {
         levelManagerScript = FindObjectOfType<LevelManager>();
+        nextSceneLoad = SceneManager.GetActiveScene().buildIndex + 1;
+
     }
 
     // Update is called once per frame
@@ -66,4 +69,13 @@ public class GameManager : MonoBehaviour
         phoneScreen.SetActive(true);
         levelManagerScript.currentLevel = -1;
     }
+
+        public void LevelSelection(){
+
+        if (nextSceneLoad > PlayerPrefs.GetInt("level"))
+        {
+            PlayerPrefs.SetInt("level", nextSceneLoad);
+        }
+    }
+
 }

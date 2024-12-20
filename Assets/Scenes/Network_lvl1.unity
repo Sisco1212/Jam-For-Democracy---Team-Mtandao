@@ -12147,7 +12147,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: a7ea76fcbcd5da54d95d1c08e54fd613, type: 2}
   - {fileID: 11400000, guid: a49994e36ec7c3f4db9ec6945da1634a, type: 2}
   targetGreenNodesCount: 6
-  timerDuration: 8
+  timerDuration: 7
 --- !u!4 &493091591
 Transform:
   m_ObjectHideFlags: 0
@@ -14115,7 +14115,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: dece9322a3908bb41b6156c67b411e63, type: 2}
   - {fileID: 11400000, guid: 6fb656874da51c442a014a4293913739, type: 2}
   targetGreenNodesCount: 3
-  timerDuration: 10
+  timerDuration: 5
 --- !u!1 &564002786
 GameObject:
   m_ObjectHideFlags: 0
@@ -21372,7 +21372,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 3f9aefe5f08e9514f9bd38573059c255, type: 2}
   - {fileID: 11400000, guid: 645e4f7e777aace4da4d601af0c064d5, type: 2}
   targetGreenNodesCount: 5
-  timerDuration: 10
+  timerDuration: 5
 --- !u!4 &820453876
 Transform:
   m_ObjectHideFlags: 0
@@ -38827,7 +38827,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 47f0793d6c5b3c44c81329a3386f8bce, type: 2}
   - {fileID: 11400000, guid: 01caa576c6f85c442b7f583ab7734105, type: 2}
   targetGreenNodesCount: 4
-  timerDuration: 7
+  timerDuration: 3
 --- !u!4 &1548326441
 Transform:
   m_ObjectHideFlags: 0

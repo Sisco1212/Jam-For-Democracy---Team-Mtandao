@@ -45,6 +45,9 @@ public class GraphManager : MonoBehaviour
     public Canvas canvas;  // Reference to the Canvas
     public GameObject levelBg;
 
+    //private bool isGameOver = false; // Track if the game is over
+
+
     private void Start()
     {
         InitializeLevel(levelData);
@@ -438,6 +441,23 @@ public class GraphManager : MonoBehaviour
             Debug.Log($"Red Count: {redCount} (Node {node.ID} set to Red)");
         }
 
+
+        // Check win condition immediately after processing the answer
+        //CheckWinCondition();
+
+        // Stop the timer if the game has already ended
+        //if (winUI.activeSelf || loseUI.activeSelf)
+        //{
+        //    if (timerCoroutine != null)
+        //    {
+        //        StopCoroutine(timerCoroutine); // Stop the timer if it's still running
+        //    }
+        //    return;
+        //}
+
+
+
+
         // Start or update the timer for the next question or node
         if (timerCoroutine != null)
         {
@@ -465,6 +485,7 @@ public class GraphManager : MonoBehaviour
         if (allNodesProcessed())
         {
             CheckWinCondition();
+            StopCoroutine(timerCoroutine);
         }
     }
 
@@ -485,6 +506,7 @@ public class GraphManager : MonoBehaviour
 
     private void CheckWinCondition()
     {
+        
         Debug.Log($"Checking win condition: Green Count = {greenCount}, Target = {targetGreenNodesCount}");
 
         if (greenCount >= targetGreenNodesCount)

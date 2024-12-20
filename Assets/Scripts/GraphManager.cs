@@ -42,7 +42,7 @@ public class GraphManager : MonoBehaviour
     private int greenCount = 0;
     private int redCount = 0;
 
-
+    public Canvas canvas;  // Reference to the Canvas
 
     private void Start()
     {
@@ -253,7 +253,7 @@ public class GraphManager : MonoBehaviour
 
         if (connectionRenderer != null)
         {
-            connectionRenderer.enabled = true; // Hide the connection
+            connectionRenderer.enabled = false; // Hide the connection
         }
 
 
@@ -518,14 +518,7 @@ public class GraphManager : MonoBehaviour
 
     public void GoToHomeLevel()
     {
-        // Find the Home level GameObject 
-        GameObject homeLevel = GameObject.FindWithTag("PhoneScreen");
-
-        // If the home level GameObject exists, activate it or set it to be active
-        if (homeLevel != null)
-        {
-            homeLevel.SetActive(true);  // Make the Home level GameObject active if it's not
-        }
+       
 
         //disable the current active level
         // Find all game objects with the "Level" tag 
@@ -537,5 +530,17 @@ public class GraphManager : MonoBehaviour
             level.SetActive(false);  // Deactivate the level(s)
         }
 
+
+
+        // If canvas is assigned in the inspector, use it directly
+        if (canvas != null)
+        {
+            canvas.gameObject.SetActive(true);  // Activate the Canvas GameObject
+            Debug.Log("Canvas activated.");
+        }
+        else
+        {
+            Debug.LogError("Canvas not assigned! Please assign a Canvas in the Inspector.");
+        }
     }
 }
